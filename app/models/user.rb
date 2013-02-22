@@ -9,7 +9,9 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username
   has_one :profile
   after_create :create_child
-  
+  def to_param
+  	username
+  end
   def create_child
   Profile.create(:user_id => id)
 end
