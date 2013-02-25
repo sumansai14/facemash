@@ -1,0 +1,11 @@
+$.ajax({
+  type:'GET',
+  contentType: 'image/png',
+  success: function() {    
+    $('img').attr('src','<%= j @profile.picture.url(:small)  %>');    
+  },
+  error: function(){
+  	$('img').attr('src','<%= j @profile.picture.url(:small)  %>');
+  }
+});
+

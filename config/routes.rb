@@ -2,11 +2,12 @@ Facemash::Application.routes.draw do
   
    
 
-  get "profile/update"
+  get "profile/update" 
 
   get "static_pages/index"
 
   devise_for :users
+  resources :profile
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
