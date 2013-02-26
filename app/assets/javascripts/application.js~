@@ -12,4 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require twitter/bootstrap
+//= require jquery.remotipart
+//= require_tree 
+$(function(){
+//	var Faye = require('faye')
+    var client = new Faye.Client('http://localhost:9292/faye');
+    client.subscribe("/messages/new",function(data) {
+    	eval(data);
+    });
+});

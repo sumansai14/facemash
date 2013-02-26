@@ -2,11 +2,16 @@ $.ajax({
   type:'GET',
   contentType: 'image/png',
   success: function() {    
-    $('img').attr('src','<%= j @profile.picture.url(:small)  %>');
+    $('#test img').attr('src','<%= j @profile.picture.url(:small)  %>');
+    $('#thumb img').attr('src','<%= j @profile.picture.url(:thumbnail)  %>');
     $('form').get(0).reset();    
   },
   error: function(){
   	$('img').attr('src','<%= j @profile.picture.url(:small)  %>');
   }
 });
-$('#name').hide().after('<%= j render("edit")%> ' );
+
+
+$('#profile_name').remove();
+$('#name').show();
+

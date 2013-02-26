@@ -3,7 +3,7 @@
 <head>
   <title>Facemash</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "application","http://172.27.31.111:9292/faye.js","http://172.27.31.111:9292/faye/client.js" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -23,13 +23,15 @@
 				 
 				  <li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					  <%= image_tag current_user.profile.picture(:thumbnail) %>					  	
+					  <div id="thumb">
+					  	<%= image_tag current_user.profile.picture(:thumbnail) %>					  	
 					  <%= current_user.profile.name %>					  
+					  </div>
 					  
 					</a>
 					<ul class="dropdown-menu">
 					  <li><%= link_to 'Profile',username_path(current_user.username)  %></li>
-					  <li><%= link_to 'Messages'  %></li>
+					  <li><%= link_to 'Messages',messages_path(current_user.username)  %></li>
 					  <li><%= link_to 'Sign out',destroy_user_session_path,:method =>:delete  %></li>
 					</ul>
 				  </li>
@@ -48,7 +50,7 @@
 		  				<li class="divider-vertical"></li>
 		  				<li><%= link_to 'Home', root_path  %></li>
 		  				<li class="divider-vertical"></li>
-		  				<li><%= link_to 'Messages' %></li>
+		  				<li><%= link_to 'Messages',messages_path(current_user.username) %></li>
 		  				<li class="divider-vertical"></li>
 		  			<% else -%>
 		  				<li><%= link_to 'Home', root_path  %></li>
@@ -70,17 +72,7 @@
 <div class="content">
 	<%= yield %>
 </div>
-<div id="chatbox">
-	<% if user_signed_in? -%>
-		<% for user in User.all -%>
-		<% if user.online? -%>
-			<%= user.email %>	
-		<% end -%>		
-	<% end -%>
-	<% else -%>
-	
-	<% end -%>
-</div>
+
 	
 </div>
 

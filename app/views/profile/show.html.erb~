@@ -19,7 +19,7 @@
 			<% else -%>
 				<div id="name">
 					<%= @profile.name %> 
-					<%= link_to 'edit',profile_update_path,:id =>"edit_link",:remote => true %>
+					<%= link_to 'edit',profile_path,:id =>"edit_link",:remote => true %>
 				</div>
 					
 					
@@ -32,7 +32,10 @@
 		
 	<% end -%>
 	<% else -%>
-	
+		<div id="name">
+					<%= @profile.name %> 					
+				</div>
+					
 	<% end -%>	
 	
 </div>

@@ -1,0 +1,4 @@
+<% broadcast "/messages/new" do -%>
+	$("#chat").append("<%= "#{@message.content}\t#{@message.created_at}" %><br/>");
+<% end %>
+$("#new_message")[0].reset();

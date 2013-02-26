@@ -2,7 +2,9 @@ Facemash::Application.routes.draw do
   
    
 
-  get "messages/index"
+  post "messages/create"
+  
+  #get "messages/index"
 
   get "profile/update" 
   
@@ -15,7 +17,7 @@ Facemash::Application.routes.draw do
   	delete 'users/sign_out' => 'sessions#destroy' , :as => 'destroy_user_session'
   end 
   resources :profile
-
+  resources :messages
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -73,4 +75,6 @@ Facemash::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
   match '/:username' => 'profile#show' , :as => :username, :constraints => {:username => /[0-9A-Za-z\-\.]+/	}
+  match "/:username/messages" => 'messages#index', :as => :messages,
+  												   :constraints => {:username => /[0-9A-Za-z\-\.]+/	}
 end

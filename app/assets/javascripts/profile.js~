@@ -2,8 +2,9 @@ $(function () {
 	$('.edit_profile input[type=submit]').hide();
 	$('.edit_profile input[type=checkbox]').hide();
 	$('.edit_profile input[type=file]').change(function(){
-		$("form:first").trigger("submit")});
-	$('#name a').hide().after('<%= j f.text_field :name %>')	
+		$(".edit_profile").trigger("submit")});
+	$('#profile_name').remove();
+	$('#name').show();	
 });
 
 
