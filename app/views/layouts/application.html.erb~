@@ -8,18 +8,85 @@
 </head>
 <body>
 
-
-<div id="user_nav">
-  <% if user_signed_in? %>
-    Signed in as <%= link_to current_user.username,id_path(current_user.username)  %>. Not you?
-    <%= link_to "Sign out", destroy_user_session_path,:method => :delete %>
-  <% else %>
-    <%= link_to "Sign up", new_user_registration_path %> or
-    <%= link_to "Sign in", new_user_session_path %>
-  <% end %>
+<div class="navbar navbar-fixed-top navbar-inverse">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>			 
+		  	</a>
+		  	<a class="brand" href="#">Facemash</a>
+		  	<div class="nav-collapse">
+		  		<% if user_signed_in? -%>
+		  			<ul class="nav pull-right">
+				 
+				  <li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					  <%= image_tag current_user.profile.picture(:thumbnail) %>					  	
+					  <%= current_user.profile.name %>
+					  
+					  <b class="caret">Test</b>
+					</a>
+					<ul class="dropdown-menu">
+					  <li><%= link_to 'Profile',username_path(current_user.username)  %></li>
+					  <li><%= link_to 'Messages'  %></li>
+					  <li><%= link_to 'Sign out',destroy_user_session_path,:method =>:delete  %></li>
+					</ul>
+				  </li>
+				</ul>
+		  		<% else -%>
+		  			<ul class="nav pull-right">	
+		  			<li><%= link_to 'Log In', new_user_session_path %></li>
+		  			<li class="divider-vertical"></li>
+		  			<li><%= link_to 'Sign up', new_user_registration_path %></li>
+		  			</ul>
+		  		<% end -%>
+		  		
+		  		
+		  		<ul class="nav">
+		  			<% if user_signed_in? -%>
+		  				<li class="divider-vertical"></li>
+		  				<li><%= link_to 'Home', root_path  %></li>
+		  				<li class="divider-vertical"></li>
+		  				<li><%= link_to 'Messages' %></li>
+		  				<li class="divider-vertical"></li>
+		  			<% else -%>
+		  				<li><%= link_to 'Home', root_path  %></li>
+		  			<% end -%>
+		  		</ul>
+		  		<form class="navbar-search">
+				  <input type="text" class="search-query" placeholder="Search">
+				</form>
+		  		
+		  	</div>
+		</div>	
+	</div> 
 </div>
 
-<%= yield %>
+
+
+
+<div class="container-fluid">
+<div class="content">
+	<%= yield %>
+</div>
+<div id="chatbox">
+	<% if user_signed_in? -%>
+		<% for user in User.all -%>
+		<% if user.online? -%>
+			<%= user.email %>	
+		<% end -%>		
+	<% end -%>
+	<% else -%>
+	
+	<% end -%>
+</div>
+	
+</div>
+
+
+
 
 </body>
 </html>

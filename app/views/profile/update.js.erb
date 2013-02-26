@@ -9,4 +9,4 @@ $.ajax({
   	$('img').attr('src','<%= j @profile.picture.url(:small)  %>');
   }
 });
-
+$('#name').hide().after('<%= j render("edit")%> ' );

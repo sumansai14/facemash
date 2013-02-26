@@ -9,16 +9,33 @@
 </div>
 	<% if current_user.username==@user.username -%>
 		<%= form_for @profile, :html => {:multipart => true },:remote => true,:url => {:controller => 'profile',:action => 'update' } do |f| -%>
-		<div id="file">Choose an image to change your profile picture</div>
-			<%= f.file_field :picture, :label => 'test' %>
-		
+		<%= f.file_field :picture, :label => 'test' %>
+		<div id="name">
+			<% if @profile.name.nil? -%>
+				<div class="field">
+				    <%= f.label :name %><br />
+				    <%= f.text_field :name %>
+				</div>
+			<% else -%>
+				<div id="name">
+					<%= @profile.name %> 
+					<%= link_to 'edit',profile_update_path,:id =>"edit_link",:remote => true %>
+				</div>
+					
+					
+			<% end -%>
+
+		</div>
 		
 		<%= f.check_box :image_delete, :label => 'Delete Image' %>
 		<%= submit_tag 'update' %>
 		
 	<% end -%>
 	<% else -%>
-	
+		<div id="name">
+					<%= @profile.name %> 					
+				</div>
+					
 	<% end -%>	
 	
 </div>

@@ -3,9 +3,7 @@ $(function () {
 	$('.edit_profile input[type=checkbox]').hide();
 	$('.edit_profile input[type=file]').change(function(){
 		$("form:first").trigger("submit")});
-
-
-
+		
 });
 
 

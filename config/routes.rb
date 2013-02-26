@@ -2,11 +2,18 @@ Facemash::Application.routes.draw do
   
    
 
+  get "messages/index"
+
   get "profile/update" 
-
+  
   get "static_pages/index"
-
-  devise_for :users
+  #match "sessions/destroy" => "sessions#destroy" , :as => 'destroy_user_session', :method => :delete
+  devise_for :users , :skip => [:sessions]
+  as :user do
+  	get 'users/sign_in' => 'devise/sessions#new', :as => 'new_user_session'
+  	post 'users/sign_in' => 'sessions#create', :as => 'user_session'
+  	delete 'users/sign_out' => 'sessions#destroy' , :as => 'destroy_user_session'
+  end 
   resources :profile
 
   # The priority is based upon order of creation:
