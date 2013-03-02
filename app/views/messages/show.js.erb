@@ -1,6 +1,12 @@
+<% user1 = User.find(@chatmessages[0].sender) -%>
+<% user2 = User.find(@chatmessages[0].reciever) -%>
 <% @chatmessages.each  do |message|  -%>
-	<% user = User.find(message.sender) -%>
-	$('#chat').append('<div class="well well-small"><%= j link_to (image_tag(user.profile.picture(:thumbnail))),username_path(user.username) %><%= j link_to current_user.profile.name, username_path(user.username) %> <%= "  #{message.content}" %></div>')
+	<% if message.sender==@chatmessages[0].sender -%>
+		$('#chat').append('<div class="well well-small"><%= j link_to (image_tag(user1.profile.picture(:thumbnail))),username_path(user1.username) %><%= j link_to user1.profile.name, username_path(user1.username) %> <%= "  #{message.content}" %></div>')
+	<% else -%>
+	$('#chat').append('<div class="well well-small"><%= j link_to (image_tag(user2.profile.picture(:thumbnail))),username_path(user2.username) %><%= j link_to user2.profile.name, username_path(user2.username) %> <%= "  #{message.content}" %></div>')
+	<% end -%>
+	
 <% end -%>
 $(function() {
   var height = $('#messagewindow')[0].scrollHeight;
