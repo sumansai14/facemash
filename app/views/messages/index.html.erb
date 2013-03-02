@@ -1,27 +1,45 @@
-<h1>Messages#index</h1>
-<p>Find me in app/views/messages/index.html.erb</p>
-<div id="chatbox">
-	<% if user_signed_in? -%>
-		<% for user in User.all -%>
-		<% if user.online? -%>
-			<div class="row">
-				<div class="span3"><%= user.profile.name %></div>
-				<div class="span9">
-					<ul id="chat">
-						<%= render @messages %>
-					</ul>
-					<%= form_for Message.new, :remote=>true, :url => {:controller=>:messages,:action =>:create }  do |f| -%>
-						
-						    <%= f.label :Message %>
-						    <%= f.text_field :content %>
-						
-						    <%= f.submit "Send" %>
-					<% end -%>
-				</div>
-			</div>	
-		<% end -%>		
-	<% end -%>
-	<% else -%>
-	
-	<% end -%>
-</div>
+<%= subscribe_to  "/messages/#{current_user.id}" %>
+<h1>Messages</h1>
+<% if user_signed_in? -%>		
+	<div class="row">
+		<div class="span3">
+			<div class="well sidebar-nav">
+				<ul class="nav nav-list userlist">
+				<% for user in User.all -%>
+				<% if user.online? and user.id!=current_user.id -%>
+				
+				<li><%= link_to({:controller=>:messages,:action=>:show,:receiver=>user.id,:sender=>current_user.id},:class => user.id ,:remote=>true,:update=>"chat") do %>
+  				<%= image_tag user.profile.picture(:thumbnail_medium) %>
+  				<%= user.profile.name %>  				
+						<% end %>
+					</li>
+				<% end -%>
+			<% end -%>
+
+				</ul>
+					
+		</div>			
+		</div>
+		<div class="span8 well well-small">	
+			<div id="chatwindow">
+ 			<div id="messagewindow">
+  <!-- messages -->
+  			<ul id="chat">
+			<%= render @messages %>
+			</ul>
+ 		</div><br>
+ <div id="inputcontainer"><%= form_for Message.new, :remote=>true, :url => {:controller=>:messages,:action =>:create }  do |f| -%>
+				<%= f.label :Message %>				
+				<%= f.text_field :content %>
+				<%= f.hidden_field :sender,:value => current_user.id %>	
+				<%= f.hidden_field :reciever %>							
+				<%= f.submit "Submit"  %>
+			<% end -%>	</div>
+			</div>			
+		</div>	
+	</div>
+<% else -%>
+
+<% end -%>
+
+

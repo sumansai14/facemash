@@ -1,0 +1,9 @@
+<% @chatmessages.each  do |message|  -%>
+	<% user = User.find(message.sender) -%>
+	$('#chat').append('<div class="well well-small"><%= j link_to (image_tag(user.profile.picture(:thumbnail))),username_path(user.username) %><%= j link_to current_user.profile.name, username_path(user.username) %> <%= "  #{message.content}" %></div>')
+<% end -%>
+$(function() {
+  var height = $('#scroll')[0].scrollHeight;
+  $('#scroll').scrollTop(height);
+});
+

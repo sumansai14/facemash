@@ -2,7 +2,7 @@ Facemash::Application.routes.draw do
   
    
 
-  get "messages/create"
+  post "messages/create"
   
   #get "messages/index"
 

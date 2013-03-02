@@ -10,10 +10,12 @@ class User < ActiveRecord::Base
   has_one :profile
   after_create :create_child
   def online?
-    if current_sign_in_at.present? 
-      last_sign_out_at.present? ? current_sign_in_at > last_sign_out_at : true
-    else
-      false
+    if current_sign_in_at.present? and last_sign_out_at.present?
+       if current_sign_in_at > last_sign_out_at 
+       	true
+      else
+      	false
+      end
     end
   end
   # Setup accessible (or protected) attributes for your model

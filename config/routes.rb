@@ -4,7 +4,7 @@ Facemash::Application.routes.draw do
 
   post "messages/create"
   
-  #get "messages/index"
+  get "messages/show"
 
   get "profile/update" 
   

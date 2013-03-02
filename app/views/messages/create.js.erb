@@ -1,4 +1,13 @@
-<% broadcast "/messages/new" do -%>
-	$("#chat").append("<%= "#{@message.content}\t#{@message.created_at}" %><br/>");
-<% end %>
-$("#new_message")[0].reset();
+<% if !["",nil].include?(@message.content.strip) -%>
+$('#chat').append('<div class="well well-small"><%= j link_to (image_tag(current_user.profile.picture(:thumbnail))),username_path(current_user.username) %><%= j link_to current_user.profile.name, username_path(current_user.username) %> <%= "  #{@message.content}" %></div>')
+<% publish_to "/messages/#{@message.reciever}" do  -%>
+	$('#chat').append('<div class="well well-small"><%= j link_to (image_tag(current_user.profile.picture(:thumbnail))),username_path(current_user.username) %><%= j link_to current_user.profile.name, username_path(current_user.username) %> <%= "  #{@message.content}" %></div>')
+<% end -%>
+<% end -%>
+$('#new_message')[0].reset();
+
+$(function() {
+  var height = $('#messagewindow')[0].scrollHeight;
+  $('#messagewindow').scrollTop(height);
+});
+

@@ -11,6 +11,9 @@ gem 'paperclip'
 gem 'remotipart'
 gem "therubyracer"
 gem "less-rails"
+gem "private_pub"
+gem "thin"
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
