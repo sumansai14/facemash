@@ -3,7 +3,7 @@
 <head>
   <title>Facemash</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application","http://localhost:9292/faye.js","http://localhost:9292/faye/client.js" %>
+  <%= javascript_include_tag "application","http://172.27.31.111:9292/faye.js","http://172.27.31.111:9292/faye/client.js" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -45,7 +45,7 @@
 		  		<% end -%>
 		  		
 		  		
-		  		<ul class="nav">
+		  		<ul class="nav top-navigation">
 		  			<% if user_signed_in? -%>
 		  				<li class="divider-vertical"></li>
 		  				<li><%= link_to 'Home', root_path  %></li>
@@ -68,7 +68,7 @@
 
 
 
-<div class="container-fluid">
+<div class="container">
 <div class="content">
 	<%= yield %>
 </div>

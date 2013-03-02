@@ -2,6 +2,10 @@
 $('#chat').append('<div class="well well-small"><%= j link_to (image_tag(current_user.profile.picture(:thumbnail))),username_path(current_user.username) %><%= j link_to current_user.profile.name, username_path(current_user.username) %> <%= "  #{@message.content}" %></div>')
 <% publish_to "/messages/#{@message.reciever}" do  -%>
 	$('#chat').append('<div class="well well-small"><%= j link_to (image_tag(current_user.profile.picture(:thumbnail))),username_path(current_user.username) %><%= j link_to current_user.profile.name, username_path(current_user.username) %> <%= "  #{@message.content}" %></div>')
+$(function() {
+  var height = $('#messagewindow')[0].scrollHeight;
+ $('#messagewindow').scrollTop(height);
+});
 <% end -%>
 <% end -%>
 $('#new_message')[0].reset();
