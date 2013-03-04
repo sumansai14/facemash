@@ -5,6 +5,6 @@ test:
   server: "http://172.27.31.111:9292/faye"
   secret_token: "secret"
 production:
-  server: "http://example.com/faye"
+  server: "http://facemash14.herokuapp.com/faye"
   secret_token: "431794fce7a613088185fdc6f30fd2a334da1e7fab41515b1ada5a75ba425636"
   signature_expiration: 3600 # one hour
